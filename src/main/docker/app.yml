@@ -1,0 +1,19 @@
+version: '2'
+services:
+    tweentyonepoints-app:
+        image: tweentyonepoints
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://tweentyonepoints-postgresql:5432/TweentyOnePoints
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=tweentyonepoints-elasticsearch:9300
+        ports:
+            - 8080:8080
+    tweentyonepoints-postgresql:
+        extends:
+            file: postgresql.yml
+            service: tweentyonepoints-postgresql
+    tweentyonepoints-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: tweentyonepoints-elasticsearch
